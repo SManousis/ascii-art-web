@@ -6,7 +6,7 @@ Ascii-art-web consists in creating and running a server, in which it will be pos
 
 # Authors
 Stamatis Manousis
-Augoystinos
+Augoustinos Andris
 
 # Usage
 On your terminal type "go run main.go". Then it should appear the following message "Server started at http://localhost:8080". When this appear open your browser and type  http://localhost:8080 and the programm should run correctly.
