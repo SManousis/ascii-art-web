@@ -142,40 +142,45 @@
             background-color: #fdd;
         }
     </style>
+    <script>
+        function clearForm() {
+            // Clear the ASCII art result
+            document.getElementById('asciiArtResult').value = '';
+        }
+    </script>
 </head>
-<body>
-    <div class="container">
-        <h1>ASCII Art Generator</h1>
-        
-        <!-- Error Message -->
-        {{if .Error}}
-            <p class="error-message">Error: {{.Error}}</p>
-        {{end}}
-        
-        <!-- Form -->
-        <form action="/" method="POST">
-            <label for="inputText">Enter text:</label>
-            <textarea id="inputText" name="inputText" rows="4" required>{{.InputText}}</textarea>
+<div class="container">
+    <h1>ASCII Art Generator</h1>
     
-            <label for="bannerSelect">Select banner:</label>
-            <select id="bannerSelect" name="banner" required>
-                <option value="" disabled {{if not .Banner}}selected{{end}}>Select a banner</option>
-                <option value="standard" {{if eq .Banner "standard"}}selected{{end}}>Standard</option>
-                <option value="shadow" {{if eq .Banner "shadow"}}selected{{end}}>Shadow</option>
-                <option value="thinkertoy" {{if eq .Banner "thinkertoy"}}selected{{end}}>Thinkertoy</option>
-            </select>
+    <!-- Error Message -->
+    {{if .Error}}
+        <p class="error-message">Error: {{.Error}}</p>
+    {{end}}
     
-            <button type="submit">Generate ASCII Art</button>
-            <button type="reset">Clear</button>
-        </form>
-    </div>
+    <!-- Form -->
+    <form action="/" method="POST">
+        <label for="inputText">Enter text:</label>
+        <textarea id="inputText" name="inputText" rows="4" required>{{.InputText}}</textarea>
 
-    <!-- ASCII Art Result Container -->
-    <div id="asciiArtContainer">
-        {{if .Result}}
-            <h2>Result:</h2>
-            <textarea id="asciiArtResult" readonly>{{.Result}}</textarea>
-        {{end}}
-    </div>
+        <label for="bannerSelect">Select banner:</label>
+        <select id="bannerSelect" name="banner" required>
+            <option value="" disabled {{if not .Banner}}selected{{end}}>Select a banner</option>
+            <option value="standard" {{if eq .Banner "standard"}}selected{{end}}>Standard</option>
+            <option value="shadow" {{if eq .Banner "shadow"}}selected{{end}}>Shadow</option>
+            <option value="thinkertoy" {{if eq .Banner "thinkertoy"}}selected{{end}}>Thinkertoy</option>
+        </select>
+
+        <button type="submit">Generate ASCII Art</button>
+        <button type="reset" onclick="clearForm()">Clear</button>
+    </form>
+</div>
+
+<!-- ASCII Art Result Container -->
+<div id="asciiArtContainer">
+    {{if .Result}}
+        <h2>Result:</h2>
+        <textarea id="asciiArtResult" readonly>{{.Result}}</textarea>
+    {{end}}
+</div>
 </body>
 </html>
