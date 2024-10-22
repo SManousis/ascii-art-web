@@ -4,9 +4,8 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"os"
-	"path/filepath"
-	"strings"
+
+	"AsciiArtWeb/funcs"
 )
 
 type PageData struct {
@@ -24,6 +23,7 @@ func main() {
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		fmt.Println("Error starting server:", err)
+		return
 	}
 }
 
@@ -60,7 +60,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Generate ASCII art
-		asciiArtResult, err := generateAsciiArt(inputText, banner)
+		asciiArtResult, err := funcs.GenerateAsciiArt(inputText, banner)
 		if err != nil {
 			data.Error = err.Error()
 			data.InputText = inputText
@@ -90,52 +90,4 @@ func renderTemplate(w http.ResponseWriter, data PageData) {
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
-}
-
-func generateAsciiArt(inputText, banner string) (string, error) {
-	bannerPath := filepath.Join("banners", banner+".txt")
-	file, err := os.ReadFile(bannerPath)
-	if err != nil {
-		return "", fmt.Errorf("banner not found")
-	}
-	str := string(file)
-	str = strings.Replace(str, "\r\n", "\n", -1)
-	lines := strings.Split(str, "\n")
-	text := strings.Split(inputText, "\n")
-	asciiArt, err := convertToAsciiArt(text, lines)
-	if err != nil {
-		return "", err
-	}
-	return asciiArt, nil
-}
-
-func convertToAsciiArt(sentences []string, textFile []string) (string, error) {
-	var result strings.Builder
-	for i, word := range sentences {
-		if word == "" {
-			// If the sentence is empty (i.e., there was a '\n'), print an empty line
-			if i != 0 {
-				result.WriteString("\n")
-			}
-			continue
-		}
-		// Loop through each of the 8 lines of ASCII art for the characters
-		for h := 1; h < 9; h++ {
-			// Loop through each character in the word
-			for i := 0; i < len(word); i++ {
-				char := word[i]
-				if char < 32 || char > 126 {
-					continue
-				}
-				for lineIndex, line := range textFile {
-					if lineIndex == (int(char)-32)*9+h {
-						result.WriteString(line)
-					}
-				}
-			}
-
-			result.WriteString("\n")
-		}
-	}
-	return result.String(), nil
 }
