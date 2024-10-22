@@ -29,7 +29,10 @@ func main() {
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	data := PageData{}
-
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
+	}
 	if r.Method == http.MethodPost {
 		// Process form submission
 		err := r.ParseForm()
