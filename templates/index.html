@@ -70,6 +70,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 800px;
             width: 100%;
+            margin-bottom: 30px; /* Space between the form and the result */
         }
 
         h1 {
@@ -110,16 +111,15 @@
             opacity: 0.9;
         }
 
-        /* Result container to stretch across full width */
         #asciiArtContainer {
-            width: 100%; /* Full width of the browser */
-            margin-top: 30px; /* Spacing from the form */
-            text-align: left;
+            width: 100%;
+            text-align: center;
         }
 
         #asciiArtResult {
-            width: 100%; /* Full width */
-            min-height: 400px;
+            width: 100%;
+            max-width: 1400px;
+            min-height: 300px;
             font-family: monospace;
             resize: vertical;
             padding: 10px;
@@ -130,6 +130,7 @@
             overflow: auto; /* Allow scrolling if the content is too long */
             border: 1px solid #ccc; /* Border for the ASCII art result text box */
             white-space: pre; /* Preserve whitespace and allow newlines */
+            margin: 0 auto; /* Center the result box */
         }
 
         .error-message {
