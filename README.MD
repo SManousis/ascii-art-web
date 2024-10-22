@@ -2,14 +2,14 @@
 This is the Ascii Art Web project written in go. It's a web server for outputting the text in a graphic representation of ASCII.
 # Objectives
 
-Ascii-art-web consists in creating and running a server, in which it will be possible to use a web GUI (graphical user interface) version of a program that outputs text in a graphical representation of ASCII
+Ascii-art-web consists of creating and running a server, in which it will be possible to use a web GUI (graphical user interface) version of a program that outputs text in a graphical representation of ASCII
 
 # Authors
 Stamatis Manousis
 Augoustinos Andris
 
 # Usage
-On your terminal type "go run main.go". Then it should appear the following message "Server started at http://localhost:8080". When this appear open your browser and type  http://localhost:8080 and the programm should run correctly.
+On your terminal type "go run main.go". You should get the following message: "Server started at http://localhost:8080". When you do, open your browser and navigate to  http://localhost:8080 and the programm should run correctly.
 
 # Implementation details
 

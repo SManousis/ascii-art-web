@@ -13,10 +13,13 @@ func GenerateAsciiArt(inputText, banner string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("banner not found")
 	}
+
+	// Ensure consistent newline formatting when converting the banner to a string slice
 	str := string(file)
 	str = strings.Replace(str, "\r\n", "\n", -1)
 	lines := strings.Split(str, "\n")
 	text := strings.Split(inputText, "\n")
+
 	asciiArt, err := ConvertToAsciiArt(text, lines)
 	if err != nil {
 		return "", err
@@ -42,11 +45,8 @@ func ConvertToAsciiArt(sentences []string, textFile []string) (string, error) {
 				if char < 32 || char > 126 {
 					continue
 				}
-				for lineIndex, line := range textFile {
-					if lineIndex == (int(char)-32)*9+h {
-						result.WriteString(line)
-					}
-				}
+				lineIndex := (int(char) - 32) * 9
+				result.WriteString(textFile[lineIndex+h])
 			}
 
 			result.WriteString("\n")
