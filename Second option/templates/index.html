@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII ART WEB</title>
+    <style>
+        #asciiArtResult {
+            width: 100%;
+            height: auto;
+            min-height: 400px;
+            font-family: monospace;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+    <center>  <h1>ASCII Art Generator</h1>
+        {{if .Error}}
+            <p style="color:red;">Error: {{.Error}}</p>
+        {{end}}
+        <form action="/" method="POST">
+            <label for="inputText">Enter text:</label><br>
+            <textarea id="inputText" name="inputText" rows="4" cols="50" required>{{.InputText}}</textarea><br><br>
+    
+            <label for="bannerSelect">Select banner:</label><br>
+            <select id="bannerSelect" name="banner">
+                <option value="" disabled {{if not .Banner}}selected{{end}}>Select a banner</option>
+                <option value="standard" {{if eq .Banner "standard"}}selected{{end}}>Standard</option>
+                <option value="shadow" {{if eq .Banner "shadow"}}selected{{end}}>Shadow</option>
+                <option value="thinkertoy" {{if eq .Banner "thinkertoy"}}selected{{end}}>Thinkertoy</option>
+            </select><br><br>
+    
+            <button type="submit">Generate ASCII Art</button>
+            <button type="reset">Clear</button>
+        </form>
+    
+        {{if .Result}}
+            <h2>Result:</h2>
+            <textarea id="asciiArtResult" readonly>{{.Result}}</textarea>
+        {{end}}
+    </center>
+
+
+    
+</body>
+</html> 
